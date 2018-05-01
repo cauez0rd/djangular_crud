@@ -9,8 +9,8 @@ class User(models.Model):
     password = models.CharField(max_length=64, validators=[MinLengthValidator(8)])
     phone = models.CharField(max_length=9, validators=[MinLengthValidator(9)])
     created_at = models.DateTimeField(editable=False)
-    viewed_at = models.DateTimeField()
-    modified_at = models.DateTimeField()
+    viewed_at = models.DateTimeField(blank=True)
+    modified_at = models.DateTimeField(blank=True)
 
     def save(self, *args, **kwargs):
         # on save, update timestamps
