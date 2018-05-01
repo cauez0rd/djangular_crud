@@ -1,3 +1,20 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
+from django.utils import timezone
 
-# Create your models here.
+
+class User(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=30)
+    password = models.CharField(max_length=64, validators=[MinLengthValidator(8)])
+    phone = models.CharField(max_length=9, validators=[MinLengthValidator(9)])
+    created_at = models.DateTimeField(editable=False)
+    viewed_at = models.DateTimeField()
+    modified_at = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        # on save, update timestamps
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super(User, self).save(*args, **kwargs)
