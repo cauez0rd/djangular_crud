@@ -7,9 +7,12 @@ myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
                 }).then(function successCallback(response) {
                     $scope.users = response.data;
                     console.log("Deu certo a call pra api! :D")
-                    console.log($scope.users);
+                    console.log($scope.users[1].created_at);
                 }, function errorCallback(response) {
                     console.log("Deu ruim na call pra API D:");
                 });
     
+    // var editUser = function(data) {
+    //     var userEditing = 
+    // }
 }]);

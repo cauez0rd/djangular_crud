@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
 
-    <!-- Importando angular por cdn -->
+    <!-- Importando angular e jquery por cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 
     <title>CRUD de Usuários</title>
 </head>
@@ -21,13 +22,6 @@
         <!-- início do navbar -->
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="#">Cadastro de Usuários</a>
             </div>
         </div>
@@ -35,9 +29,20 @@
     <!-- fim do navbar -->
      <!-- início do container da página -->
     <div class="container page" data-ng-controller="CadastroCtrl as ctrl">
-        <h1 class="text-center">Let's CRUD!</h1>
-        
-
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <div class="alert alert-default navbar-brand search-box">
+                    <button class="btn btn-primary" ng-click="formToggle()">Novo usuário
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="alert alert-default input-group search-box">
+                    <span class="input-group-btn">
+                        <input type="text" class="form-control" placeholder="Procurar por usuário no banco..." ng-model="search_query">
+                    </span>
+                </div>
+            </div>
+        </nav>
         <!-- <form name="ctrl.form" data-ng-submit="ctrl.submitForm(ctrl.data)">
             início do form
             
@@ -92,21 +97,60 @@
                         <td>{{user.viewed_at}}</td>
                         <td>{{user.modified_at}}</td>
                         <td>
-                            <button class="btn glyphicon glyphicon-pencil" data-ng-click="ctrl.editar(row, $index);"></button>
+                            <button class="btn glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal" data-ng-click=""></button>
                         </td>
+                        
                         <td>
                             <button class="btn glyphicon glyphicon-trash" data-ng-click="ctrl.remover($index);"></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <!-- fim do form -->
         </div>
-        <!-- fim do jumbotron -->
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editar usuário</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span class="modal-user-data">Nome: </span>
+                        <input type="text" class="form-control" id="userName" name="userName" data-ng-required="ctrl.form.userName.$error.required"/>
+                        <br>
+                        <span class="modal-user-data">E-mail: </span>
+                        <input type="email" class="form-control" id="userEmail" name="userEmail" data-ng-required="ctrl.form.userEmail.$error.required"
+                        />
+                        <br>
+                        <span class="modal-user-data">Senha: </span>
+                        <input type="password" class="form-control" id="userName" name="userPassword" data-ng-required="ctrl.form.userPassword.$error.required"
+                        />
+                        <br>
+                        <span class="modal-user-data">Telefone: </span>
+                        <input type="text" class="form-control" id="userPhone" name="userPhone" data-ng-required="ctrl.form.userPhone.$error.required"
+                        />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Salvar Alterações</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <!-- Fim Modal -->
+        
     </div>
     <!-- fim do container da página -->
-
     
+    
+
+    <!-- Importando bootstrap.min.js da cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Importando javascript local -->
     <script src="js/app.js" type="text/javascript"></script>
     <script src="js/controller/cadastroCtrl.js" type="text/javascript"></script>
