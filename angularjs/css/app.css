@@ -8,3 +8,9 @@
 }
 
 .fake-button { background: none; border: none; }
+
+td span { cursor: pointer; }
+td span:hover { color: blue; }
+
+.edit-user-button { background: #469D4B; }
+.delete-user-button { background: #D7433D; }

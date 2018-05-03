@@ -43,35 +43,7 @@
                 </div>
             </div>
         </nav>
-        <!-- <form name="ctrl.form" data-ng-submit="ctrl.submitForm(ctrl.data)">
-            início do form
-            
-            <div class="form-group">
-                <label for="userName">Nome:</label>
-                <input type="text" class="form-control" id="userName" name="userName" data-ng-model="ctrl.data.userName" data-ng-required="ctrl.form.userName.$error.required"5/>
-            </div>
-            <div class="form-group">
-                <label for="userEmail">E-mail:</label>
-                <input type="email" class="form-control" id="userEmail" name="userEmail" data-ng-model="ctrl.data.userEmail" data-ng-required="ctrl.form.userEmail.$error.required"/>
-            </div>
-            <div class="form-group">
-                <label for="userPassword">Senha:</label>
-                <input type="password" class="form-control" id="userPassword" name="userPassword" data-ng-model="ctrl.data.userPassword" data-ng-required="ctrl.form.userEmail.$error.required"/>
-            </div>
-            <div class="form-group">
-                <label for="userPhone">Telefone:</label>
-                <input type="text" class="form-control" id="userPhone" data-ng-model="ctrl.data.userPhone" />
-            </div>
-            
-            <div class="button-group">
-                <button type="submit" class="btn btn-success navbar-btn button" data-ng-disabled="ctrl.form.$invalid">Salvar</button>
-                <button type="reset" class="btn btn-default navbar-btn button" data-ng-click="ctrl.limpar();" data-ng-disabled="ctrl.form.$invalid">Limpar Dados</button>
-            </div>
-        </form> -->
-
-        
-        <!-- fim do form -->
-
+      
         <div class="user-display">
             <!-- início do display de usuários -->
             <table class="table table-striped">
@@ -89,24 +61,57 @@
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="user in users | filter: search_query | orderBy:customOrderBy">
-                        <td>{{user.name}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.password}}</td>
-                        <td>{{user.phone}}</td>
-                        <td>{{user.created_at | date:'H:mm dd/MM/yyyy'}}</td>
-                        <td>{{user.viewed_at | date:'H:mm dd/MM/yyyy'}}</td>
-                        <td>{{user.modified_at | date:'H:mm dd/MM/yyyy'}}</td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.name}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.email}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.password}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.phone}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.created_at | date:'H:mm dd/MM/yyyy'}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.viewed_at | date:'H:mm dd/MM/yyyy'}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.modified_at | date:'H:mm dd/MM/yyyy'}}</span></td>
                         <td>
-                            <button class="btn glyphicon glyphicon-pencil" data-toggle="modal" data-target="#userEditModal" data-ng-click="editUser(user)"></button>
+                            <button class="edit-user-button btn glyphicon glyphicon-pencil" data-toggle="modal" data-target="#userEditModal" data-ng-click="editUser(user)"></button>
                         </td>
                         
                         <td>
-                            <button class="btn glyphicon glyphicon-trash" data-ng-click="ctrl.remover($index);"></button>
+                            <button class="delete-user-button btn glyphicon glyphicon-trash" data-toggle="modal" data-target="#confirmDeleteModal" data-ng-click="modalDeleteUser(user)"></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <!-- Modal de visualizar usuários -->
+        <div id="userViewModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{userBeingViewed.name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span class="modal-user-data">Nome: </span>
+                        <p class="user-being-viewed">{{userBeingViewed.name}}</p>
+                        <br>
+                        <span class="modal-user-data">E-mail: </span>
+                        <p class="user-being-viewed">{{userBeingViewed.email}}</p>
+                        <br>
+                        <span class="modal-user-data">Senha: </span>
+                        <p class="user-being-viewed">{{userBeingViewed.password}}</p>
+                        <br>
+                        <span class="modal-user-data">Telefone: </span>
+                        <p class="user-being-viewed">{{userBeingViewed.phone}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#userEditModal" data-ng-click="editUser(userBeingViewed)">Editar Usuário <span class="glyphicon glyphicon-pencil"></span></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <!-- Fim Modal de editar usuários -->
 
         <!-- Modal de editar usuários -->
         <div id="userEditModal" class="modal fade" role="dialog">
@@ -149,24 +154,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Editar usuário</h4>
+                        <h4 class="modal-title">Adicionar novo usuário</h4>
                     </div>
                     <div class="modal-body">
                         <span class="modal-user-data">Nome: </span>
-                        <input type="text" class="form-control" id="newUserName" name="newUserName" placeholder="{{userBeingEdited.name}}" ng-model="userBeingEdited.name">
+                        <input type="text" class="form-control" id="newUserName" name="newUserName" ng-model="newUser.name">
                         <br>
                         <span class="modal-user-data">E-mail: </span>
-                        <input type="email" class="form-control" id="newUserEmail" name="newUserEmail" placeholder="{{userBeingEdited.email}}" ng-model="userBeingEdited.email"/>
+                        <input type="email" class="form-control" id="newUserEmail" name="newUserEmail" ng-model="newUser.email"/>
                         <br>
                         <span class="modal-user-data">Senha: </span>
-                        <input type="password" class="form-control" id="newUserPassword" name="newUserPassword" placeholder="{{userBeingEdited.password}}" ng-model="userBeingEdited.password"
-                        />
+                        <input type="password" class="form-control" id="newUserPassword" name="newUserPassword" ng-model="newUser.password"/>
                         <br>
                         <span class="modal-user-data">Telefone: </span>
-                        <input type="text" class="form-control" id="newUserPhone" name="newUserPhone" placeholder="{{userBeingEdited.phone}}" ng-model="userBeingEdited.phone"/>
+                        <input type="text" class="form-control" id="newUserPhone" name="newUserPhone" ng-model="newUser.phone"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveEditedUser()">Adicionar novo usuário</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveNewUser()">Adicionar novo usuário</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
@@ -175,6 +179,27 @@
         </div>
         <!-- Fim Modal de criar novo usuário -->
         
+        <!-- Modal de confirmação para deletar usuário -->
+        <div id="confirmDeleteModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Confirmar remoção de usuário</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span>Tem certeza que deseja remover o usuário {{userToDelete.name}}?</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="deleteUser(user)">Remover Usuário</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <!-- Fim modal de confirmação para deletar usuário -->
     </div>
     <!-- fim do container da página -->
     
