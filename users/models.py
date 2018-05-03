@@ -9,7 +9,7 @@ class User(models.Model):
     password = models.CharField(max_length=64, validators=[MinLengthValidator(8)])
     phone = models.CharField(max_length=9, validators=[MinLengthValidator(9)])
     created_at = models.DateTimeField(editable=False)
-    viewed_at = models.DateTimeField(blank=True, null=True, editable=False)
+    viewed_at = models.DateTimeField(blank=True, null=True)
     modified_at = models.DateTimeField(blank=True, null=True, editable=False)
 
     def save(self, *args, **kwargs):
@@ -18,6 +18,7 @@ class User(models.Model):
             self.created_at = timezone.now()
         else:
             self.modified_at = timezone.now()
+        self.viewed_at = timezone.now()
         return super(User, self).save(*args, **kwargs)
 
     def __str__(self):
