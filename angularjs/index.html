@@ -22,7 +22,7 @@
         <!-- início do navbar -->
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Cadastro de Usuários</a>
+                <a class="navbar-brand">Cadastro de Usuários</a>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="alert alert-default input-group search-box">
                     <span class="input-group-btn">
-                        <input type="text" class="form-control" placeholder="Procurar por usuário no banco..." ng-model="search_query">
+                        <input type="text" class="form-control" placeholder="Procurar por usuário..." data-ng-model="search_query">
                     </span>
                 </div>
             </div>
@@ -49,25 +49,25 @@
             <table class="table table-striped">
                 <!-- início do table -->
                 <thead>
-                    <th ng-click="orderByMe('name')"><button class="fake-button">Nome</button></th>
-                    <th ng-click="orderByMe('email')"><button class="fake-button">E-mail</button></th>
-                    <th ng-click="orderByMe('password')"><button class="fake-button">Senha</button></th>
-                    <th ng-click="orderByMe('phone')"><button class="fake-button">Telefone</button></th>
-                    <th ng-click="orderByMe('created_at')"><button class="fake-button">Criado em</button></th>
-                    <th ng-click="orderByMe('viewed_at')"><button class="fake-button">Visualizado em</button></th>
-                    <th ng-click="orderByMe('modified_at')"><button class="fake-button">Alterado em</button></th>
+                    <th data-ng-click="orderByMe('name')"><button class="fake-button">Nome</button></th>
+                    <th data-ng-click="orderByMe('email')"><button class="fake-button">E-mail</button></th>
+                    <th data-ng-click="orderByMe('password')"><button class="fake-button">Senha</button></th>
+                    <th data-ng-click="orderByMe('phone')"><button class="fake-button">Telefone</button></th>
+                    <th data-ng-click="orderByMe('created_at')"><button class="fake-button">Criado em</button></th>
+                    <th data-ng-click="orderByMe('viewed_at')"><button class="fake-button">Visualizado em</button></th>
+                    <th data-ng-click="orderByMe('modified_at')"><button class="fake-button">Alterado em</button></th>
                     <th></th>
                     <th></th>
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="user in users | filter: search_query | orderBy:customOrderBy">
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.name}}</span></td>
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.email}}</span></td>
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.password}}</span></td>
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.phone}}</span></td>
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.created_at | date:'H:mm dd/MM/yyyy'}}</span></td>
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.viewed_at | date:'H:mm dd/MM/yyyy'}}</span></td>
-                        <td data-toggle="modal" data-target="#userViewModal" ng-click="viewUser(user)"><span>{{user.modified_at | date:'H:mm dd/MM/yyyy'}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.name}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.email}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.password}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.phone}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.created_at | date:'H:mm dd/MM/yyyy'}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.viewed_at | date:'H:mm dd/MM/yyyy'}}</span></td>
+                        <td data-toggle="modal" data-target="#userViewModal" data-ng-click="viewUser(user)"><span>{{user.modified_at | date:'H:mm dd/MM/yyyy'}}</span></td>
                         <td>
                             <button class="edit-user-button btn glyphicon glyphicon-pencil" data-toggle="modal" data-target="#userEditModal" data-ng-click="editUser(user)"></button>
                         </td>
@@ -94,12 +94,15 @@
                         <span class="modal-user-data">Nome: </span>
                         <p class="user-being-viewed">{{userBeingViewed.name}}</p>
                         <br>
+
                         <span class="modal-user-data">E-mail: </span>
                         <p class="user-being-viewed">{{userBeingViewed.email}}</p>
                         <br>
+
                         <span class="modal-user-data">Senha: </span>
                         <p class="user-being-viewed">{{userBeingViewed.password}}</p>
                         <br>
+
                         <span class="modal-user-data">Telefone: </span>
                         <p class="user-being-viewed">{{userBeingViewed.phone}}</p>
                     </div>
@@ -125,19 +128,22 @@
                     </div>
                     <div class="modal-body">
                         <span class="modal-user-data">Nome: </span>
-                        <input type="text" class="form-control" id="editUserName" name="editUserName" placeholder="{{userBeingEdited.name}}" ng-model="userBeingEdited.name">
+                        <input type="text" class="form-control" id="editUserName" name="editUserName" data-ng-model="userBeingEdited.name">
                         <br>
+
                         <span class="modal-user-data">E-mail: </span>
-                        <input type="email" class="form-control" id="editUserEmail" name="editUserEmail" placeholder="{{userBeingEdited.email}}" ng-model="userBeingEdited.email"/> 
+                        <input type="email" class="form-control" id="editUserEmail" name="editUserEmail" data-ng-model="userBeingEdited.email"/> 
                         <br>
+
                         <span class="modal-user-data">Senha: </span>
-                        <input type="password" class="form-control" id="editUserPassword" name="editUserPassword" placeholder="{{userBeingEdited.password}}" ng-model="userBeingEdited.password"/>
+                        <input type="password" class="form-control" id="editUserPassword" name="editUserPassword" data-ng-model="userBeingEdited.password"/>
                         <br>
+
                         <span class="modal-user-data">Telefone: </span>
-                        <input type="text" class="form-control" id="editUserPhone" name="editUserPhone" placeholder="{{userBeingEdited.phone}}" ng-model="userBeingEdited.phone"/>
+                        <input type="text" class="form-control" id="editUserPhone" name="editUserPhone" data-ng-model="userBeingEdited.phone"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" ng-click="saveEditedUser()" data-dismiss="modal">Salvar Alterações</button>
+                        <button type="button" class="btn btn-success" data-ng-click="saveEditedUser()" data-dismiss="modal">Salvar Alterações</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
@@ -157,21 +163,30 @@
                         <h4 class="modal-title">Adicionar novo usuário</h4>
                     </div>
                     <div class="modal-body">
-                        <span class="modal-user-data">Nome: </span>
-                        <input type="text" class="form-control" id="newUserName" name="newUserName" ng-model="newUser.name">
-                        <br>
-                        <span class="modal-user-data">E-mail: </span>
-                        <input type="email" class="form-control" id="newUserEmail" name="newUserEmail" ng-model="newUser.email"/>
-                        <br>
-                        <span class="modal-user-data">Senha: </span>
-                        <input type="password" class="form-control" id="newUserPassword" name="newUserPassword" ng-model="newUser.password"/>
-                        <br>
-                        <span class="modal-user-data">Telefone: </span>
-                        <input type="text" class="form-control" id="newUserPhone" name="newUserPhone" ng-model="newUser.phone"/>
+                        <form name="newUserForm" class="form-group">
+                            <span class="modal-user-data">Nome: </span>
+                            <input type="text" class="form-control" id="newUserName" name="newUserName" data-ng-model="newUser.name" required>
+                            <p class="text-danger" data-ng-show="newUserForm.newUserName.$touched && newUserForm.newUserName.$invalid">Nome não pode ficar em branco</p>
+                            <br>
+
+                            <span class="modal-user-data">E-mail: </span>
+                            <input type="email" class="form-control" id="newUserEmail" name="newUserEmail" data-ng-model="newUser.email" required/>
+                            <p class="text-danger" data-ng-show="newUserForm.newUserEmail.$invalid && newUserForm.newUserEmail.$dirty">E-mail inválido</p>
+                            <br>
+
+                            <span class="modal-user-data">Senha: </span>
+                            <input type="password" class="form-control" id="newUserPassword" name="newUserPassword" data-ng-model="newUser.password" data-ng-minlength="8" required/>
+                            <p class="text-danger" data-ng-if="!newUserForm.newUserPassword.$valid && newUserForm.newUserPassword.$dirty">A senha deve ter pelo menos 8 caracteres</p>
+                            <br>
+                            
+                            <span class="modal-user-data">Telefone: </span>
+                            <input type="text" class="form-control" id="newUserPhone" name="newUserPhone" data-ng-model="newUser.phone" data-ng-minlength="9" data-ng-maxlength="9" required/>
+                            <p class="text-danger" data-ng-if="!newUserForm.newUserPhone.$valid && newUserForm.newUserPhone.$dirty">O telefone precisa ter 9 dígitos</p>
+                        </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveNewUser()">Adicionar novo usuário</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" data-ng-click="saveNewUser(newUserForm)" data-ng-disabled="newUserForm.$pristine || newUserForm.$dirty && newUserForm.$invalid">Adicionar novo usuário</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="resetNewUserForm(newUserForm)">Fechar</button>
                     </div>
                 </div>
         

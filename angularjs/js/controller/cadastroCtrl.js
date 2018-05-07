@@ -2,19 +2,6 @@ myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
     let apiURL = 'http://localhost:8000/users/';
 
     let getAllUsers = $http.get(apiURL)
-                                    .then(function successCallback(response) {
-                                        $scope.users = response.data;
-                                        console.log("deu certooo");
-                                        console.log(response.status, response.statusText);
-                                        console.log($scope.users);
-                                    }, function errorCallback(response) {
-                                        console.log("Deu ruim :(((");
-                                        console.log(response.status, response.statusText);
-                                    }
-    )
-
-    $scope.updateAllUsers = function() {
-        $http.get(apiURL)
             .then(function successCallback(response) {
                 $scope.users = response.data;
                 console.log("deu certooo");
@@ -22,6 +9,28 @@ myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
                 console.log($scope.users);
             }, function errorCallback(response) {
                 console.log("Deu ruim :(((");
+                console.log(response.status, response.statusText);
+            }
+    )
+
+    $scope.resetNewUserForm = function(form) {
+        form.$setPristine();
+        form.$setUntouched();
+        $scope.newUser.name = '';
+        $scope.newUser.email = '';
+        $scope.newUser.password = '';
+        $scope.newUser.phone = '';
+    }
+
+    $scope.updateAllUsers = function() {
+        $http.get(apiURL)
+            .then(function successCallback(response) {
+                $scope.users = response.data;
+                console.log("updateAllUsers deu certo com status:");
+                console.log(response.status, response.statusText);
+                console.log($scope.users);
+            }, function errorCallback(response) {
+                console.log("updateAllUsers retornou o erro:");
                 console.log(response.status, response.statusText);
             }
             )
@@ -49,25 +58,32 @@ myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.saveEditedUser = function() {
         $http.put($scope.userURL, $scope.userBeingEdited)
-                                .then(function successCallback(response) {
-                                    console.log(response.status, response.statusText);
-                                    $scope.updateAllUsers();
-                                }, function errorCallback(response) {
-                                    console.log("Deu ruim :(((");
-                                    console.log(response.status, response.statusText);
-                                });
-    }
-
-    $scope.saveNewUser = function() {
-        $http.post(apiURL, $scope.newUser)
             .then(function successCallback(response) {
                 console.log(response.status, response.statusText);
-                $scope.newUser = new Object();
                 $scope.updateAllUsers();
             }, function errorCallback(response) {
                 console.log("Deu ruim :(((");
                 console.log(response.status, response.statusText);
             });
+    }
+
+    $scope.saveNewUser = function(form) {
+        $http.post(apiURL, $scope.newUser)
+            .then(function successCallback(response) {
+                console.log(response.status, response.statusText);
+                $scope.updateAllUsers();
+                $scope.newUser = {};
+                form.$setPristine();
+                form.$setUntouched();
+                console.log($scope.newUser);
+            }, function errorCallback(response) {
+                console.log("Deu ruim :(((");
+                console.log(response.status, response.statusText);
+                $scope.newUser = {};
+                form.$setPristine();
+                form.$setUntouched();
+                console.log($scope.newUser);
+            });  
     }
 
     $scope.modalDeleteUser = function(user) {
@@ -77,16 +93,16 @@ myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.deleteUser = function() {
         $http.delete($scope.userToDeleteURL)
-                                    .then(function successCallback(response) {
-                                        console.log(response.status, response.statusText);
-                                        $scope.updateAllUsers();
-                                    }), function errorCallback(response) {
-                                        console.log(response.status, response.statusText);
-                                    }
+            .then(function successCallback(response) {
+                console.log(response.status, response.statusText);
+                $scope.updateAllUsers();
+            }), function errorCallback(response) {
+                console.log(response.status, response.statusText);
+            }
     }
 
     $scope.orderByMe = function(customOrderBy) {
         $scope.customOrderBy = customOrderBy;
-        console.log(customOrderBy);
+        console.log("Ordenando users por " + customOrderBy);
     }
 }]);
