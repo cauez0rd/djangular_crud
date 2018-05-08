@@ -166,22 +166,22 @@
                         <form name="newUserForm" class="form-group">
                             <span class="modal-user-data">Nome: </span>
                             <input type="text" class="form-control" id="newUserName" name="newUserName" data-ng-model="newUser.name" required>
-                            <p class="text-danger" data-ng-show="newUserForm.newUserName.$touched && newUserForm.newUserName.$invalid">Nome não pode ficar em branco</p>
+                            <p class="text-danger" data-ng-if="newUserForm.newUserName.$invalid && newUserForm.newUserName.$touched">Nome não pode ficar em branco</p>
                             <br>
 
                             <span class="modal-user-data">E-mail: </span>
                             <input type="email" class="form-control" id="newUserEmail" name="newUserEmail" data-ng-model="newUser.email" required/>
-                            <p class="text-danger" data-ng-show="newUserForm.newUserEmail.$invalid && newUserForm.newUserEmail.$dirty">E-mail inválido</p>
+                            <p class="text-danger" data-ng-if="newUserForm.newUserEmail.$invalid && newUserForm.newUserEmail.$touched">E-mail inválido</p>
                             <br>
 
                             <span class="modal-user-data">Senha: </span>
                             <input type="password" class="form-control" id="newUserPassword" name="newUserPassword" data-ng-model="newUser.password" data-ng-minlength="8" required/>
-                            <p class="text-danger" data-ng-if="!newUserForm.newUserPassword.$valid && newUserForm.newUserPassword.$dirty">A senha deve ter pelo menos 8 caracteres</p>
+                            <p class="text-danger" data-ng-if="newUserForm.newUserPassword.$invalid && newUserForm.newUserPassword.$touched">A senha deve ter pelo menos 8 caracteres</p>
                             <br>
                             
                             <span class="modal-user-data">Telefone: </span>
                             <input type="text" class="form-control" id="newUserPhone" name="newUserPhone" data-ng-model="newUser.phone" data-ng-minlength="9" data-ng-maxlength="9" required/>
-                            <p class="text-danger" data-ng-if="!newUserForm.newUserPhone.$valid && newUserForm.newUserPhone.$dirty">O telefone precisa ter 9 dígitos</p>
+                            <p class="text-danger" data-ng-if="newUserForm.newUserPhone.$invalid && newUserForm.newUserPhone.$touched">O telefone precisa ter 9 dígitos</p>
                         </form>
                     </div>
                     <div class="modal-footer">
