@@ -127,23 +127,29 @@
                         <h4 class="modal-title">Editar usuário</h4>
                     </div>
                     <div class="modal-body">
-                        <span class="modal-user-data">Nome: </span>
-                        <input type="text" class="form-control" id="editUserName" name="editUserName" data-ng-model="userBeingEdited.name">
-                        <br>
+                        <form name="editUserForm" class="form-group">
+                            <span class="modal-user-data">Nome: </span>
+                            <input type="text" class="form-control" id="editUserName" name="editUserName" data-ng-model="userBeingEdited.name" required>
+                            <p class="text-danger" data-ng-if="editUserForm.editUserName.$invalid && editUserForm.editUserName.$touched">Nome não pode ficar em branco</p>
+                            <br>
 
-                        <span class="modal-user-data">E-mail: </span>
-                        <input type="email" class="form-control" id="editUserEmail" name="editUserEmail" data-ng-model="userBeingEdited.email"/> 
-                        <br>
+                            <span class="modal-user-data">E-mail: </span>
+                            <input type="email" class="form-control" id ="editUserEmail" name="editUserEmail" data-ng-model="userBeingEdited.email" required/> 
+                            <p class="text-danger" data-ng-if="editUserForm.editUserEmail.$invalid && editUserForm.editUserEmail.$touched">E-mail inválido</p>
+                            <br>
 
-                        <span class="modal-user-data">Senha: </span>
-                        <input type="password" class="form-control" id="editUserPassword" name="editUserPassword" data-ng-model="userBeingEdited.password"/>
-                        <br>
+                            <span class="modal-user-data">Senha: </span>
+                            <input type="password" class="form-control" id="editUserPassword" name="editUserPassword" data-ng-model="userBeingEdited.password" data-ng-minlength="8" required/>
+                            <p class="text-danger" data-ng-if="editUserForm.editUserPassword.$invalid && editUserForm.editUserPassword.$touched">A senha deve ter no mínimo 8 caracteres</p>
+                            <br>
 
-                        <span class="modal-user-data">Telefone: </span>
-                        <input type="text" class="form-control" id="editUserPhone" name="editUserPhone" data-ng-model="userBeingEdited.phone"/>
+                            <span class="modal-user-data">Telefone: </span>
+                            <input type="text" class="form-control" id="editUserPhone" name="editUserPhone" data-ng-model="userBeingEdited.phone" data-ng-minlength="9" data-ng-maxlength="9" required/>
+                            <p class="text-danger" data-ng-if="editUserForm.editUserPhone.$invalid && editUserForm.editUserPhone.$touched">O telefone deve ter exatamente 9 dígitos</p>
+                        </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-ng-click="saveEditedUser()" data-dismiss="modal">Salvar Alterações</button>
+                        <button type="button" class="btn btn-success" data-ng-click="saveEditedUser()" data-dismiss="modal" data-ng-disabled="editUserForm.$invalid">Salvar Alterações</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
