@@ -1,5 +1,6 @@
 myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
     let apiURL = 'http://localhost:8000/users/';
+    let order = "-";
 
     let getAllUsers = $http.get(apiURL)
             .then(function successCallback(response) {
@@ -102,7 +103,12 @@ myApp.controller('CadastroCtrl', ['$scope', '$http', function($scope, $http) {
     }
 
     $scope.orderByMe = function(customOrderBy) {
-        $scope.customOrderBy = customOrderBy;
-        console.log("Ordenando users por " + customOrderBy);
+        if (order == "+") {
+            order = "-";
+        } else {
+            order = "+";
+        }
+        $scope.customOrderBy = order + customOrderBy;
+        console.log("Ordenando users por " + order + customOrderBy);
     }
 }]);
