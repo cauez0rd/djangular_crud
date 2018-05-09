@@ -4,15 +4,12 @@ Project made for learning purposes. REST API was made with Django2 and frontend 
 
 ## How to use it
 Just add your users and fill their data.
-The users' *email* **must** be valid (as in, have an @something.other).
-The *phone* field **must have exactly 9 characters.** Just to keep things interesting. 
-The *password* field **must** have at least 8 characters.
 
 ## What it can do (for now)
 All CRUD basics. You can create, read, update and delete the users. The dates are automatically added according to your actions. The users persist on the database.
 You can filter users by whatever you want just by typing into the upper input, you can order the users by clicking on the parameter which you wish to order them by, you can view users' details by clicking on any one of the data fields.
 
-**There is only backend validation for now**. Sorry.
+**There is now both frontend and backend validation.**
 
 ## Requirements
 You must have python3 installed on your machine. That's it. The rest we can do on a python virtualenv so it won't drive your pip crazy.
