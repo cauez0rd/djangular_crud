@@ -1,3 +1,58 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic";
+
+/* =============== 
+    animations 
+================*/
+@keyframes pulse {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  50%{
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+/*====================== 
+    general elements
+======================*/
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
+    font-style: normal;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    letter-spacing: 0.01rem;
+}
+
+td span { cursor: pointer; }
+
+th { font-size: 1em; }
+
+.table > tbody > tr > td {
+    /* vertically centralize table elements */
+    vertical-align: middle;
+
+    color: hsl(0, 0%, 19%);
+    font-weight: 400;
+    border: none;
+}
+
+/* removes annoying thead border-bottom */
+.table thead > tr > th { border-bottom: none; }
+
+
+/* ============
+    classes
+=============*/
 .page {
     margin-top: 80px;
     margin-bottom: 20px;
@@ -7,10 +62,33 @@
     margin-top: 40px;
 }
 
-.fake-button { background: none; border: none; }
+.fake-button { 
+    background: none; 
+    border: none; 
+    color: #fff;
+    font-weight: 700;
+}
 
-td span { cursor: pointer; }
-td span:hover { color: blue; }
+.fake-button:hover {
+    animation-duration: 0.3s;
+    animation-name: pulse;
+}
+.edit-user-button { background: rgb(98, 207, 103); }
+.delete-user-button { background: rgb(216, 103, 103); }
 
-.edit-user-button { background: #469D4B; }
-.delete-user-button { background: #D7433D; }
+.btn, .modal-user-data {
+    font-weight: 700;
+}
+.btn:hover {
+    animation-duration: 1s;
+    animation-name: pulse;
+}
+
+.user-being-viewed, .user-being-edited {
+    font-weight: 400;
+}
+
+.bg-color-black {
+    /* background-color: #363049; */
+    background-color: #222;
+}

@@ -40,18 +40,18 @@
     <div class="container page" data-ng-controller="CadastroCtrl as ctrl">
         <div class="user-display">
             <!-- início do display de usuários -->
-            <table class="table table-striped">
+            <table class="table table-hover">
                 <!-- início do table -->
                 <thead>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('name')">Nome</button></th>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('email')">E-mail</button></th>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('password')">Senha</button></th>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('phone')">Telefone</button></th>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('created_at')">Criado em</button></th>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('viewed_at')">Visualizado em</button></th>
-                    <th class="text-center"><button class="fake-button" data-ng-click="orderByMe('modified_at')">Alterado em</button></th>
-                    <th></th>
-                    <th></th>
+                    <th class="bg-color-black"><button class="fake-button" data-ng-click="orderByMe('name')">Nome</button></th>
+                    <th class="bg-color-black"><button class="fake-button" data-ng-click="orderByMe('email')">E-mail</button></th>
+                    <th class="bg-color-black"><button class="fake-button" data-ng-click="orderByMe('password')">Senha</button></th>
+                    <th class="bg-color-black text-center"><button class="fake-button" data-ng-click="orderByMe('phone')">Telefone</button></th>
+                    <th class="text-right bg-color-black"><button class="fake-button" data-ng-click="orderByMe('created_at')">Criado em</button></th>
+                    <th class="text-right bg-color-black"><button class="fake-button" data-ng-click="orderByMe('viewed_at')">Visualizado em</button></th>
+                    <th class="text-right bg-color-black"><button class="fake-button" data-ng-click="orderByMe('modified_at')">Alterado em</button></th>
+                    <th class="bg-color-black"></th>
+                    <th class="bg-color-black"></th>
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="user in users | filter: search_query | orderBy:customOrderBy">
@@ -123,22 +123,22 @@
                     <div class="modal-body">
                         <form name="editUserForm" class="form-group">
                             <span class="modal-user-data">Nome: </span>
-                            <input type="text" class="form-control" id="editUserName" name="editUserName" data-ng-model="userBeingEdited.name" required>
+                            <input type="text" class="form-control user-being-edited" id="editUserName" name="editUserName" data-ng-model="userBeingEdited.name" required>
                             <p class="text-danger" data-ng-if="editUserForm.editUserName.$invalid && editUserForm.editUserName.$touched">Nome não pode ficar em branco</p>
                             <br>
 
                             <span class="modal-user-data">E-mail: </span>
-                            <input type="email" class="form-control" id ="editUserEmail" name="editUserEmail" data-ng-model="userBeingEdited.email" required/> 
+                            <input type="email" class="form-control user-being-edited" id ="editUserEmail" name="editUserEmail" data-ng-model="userBeingEdited.email" required/> 
                             <p class="text-danger" data-ng-if="editUserForm.editUserEmail.$invalid && editUserForm.editUserEmail.$touched">E-mail inválido</p>
                             <br>
 
                             <span class="modal-user-data">Senha: </span>
-                            <input type="password" class="form-control" id="editUserPassword" name="editUserPassword" data-ng-model="userBeingEdited.password" data-ng-minlength="8" required/>
+                            <input type="password" class="form-control user-being-edited" id="editUserPassword" name="editUserPassword" data-ng-model="userBeingEdited.password" data-ng-minlength="8" required/>
                             <p class="text-danger" data-ng-if="editUserForm.editUserPassword.$invalid && editUserForm.editUserPassword.$touched">A senha deve ter no mínimo 8 caracteres</p>
                             <br>
 
                             <span class="modal-user-data">Telefone: </span>
-                            <input type="text" class="form-control" id="editUserPhone" name="editUserPhone" data-ng-model="userBeingEdited.phone" data-ng-minlength="9" data-ng-maxlength="9" required/>
+                            <input type="text" class="form-control user-being-edited" id="editUserPhone" name="editUserPhone" data-ng-model="userBeingEdited.phone" data-ng-minlength="9" data-ng-maxlength="9" required/>
                             <p class="text-danger" data-ng-if="editUserForm.editUserPhone.$invalid && editUserForm.editUserPhone.$touched">O telefone deve ter exatamente 9 dígitos</p>
                         </form>
                     </div>
